@@ -10,8 +10,66 @@ class HangpersonGame
   
   def initialize(word)
     @word = word
+    @guesses = ''
+    @wrong_guesses = ''
+    return self
+  end
+  
+  def word
+    return @word
+  end
+  
+  def guesses
+    return @guesses
   end
 
+  def wrong_guesses
+    return @wrong_guesses
+  end
+  
+  def guess(letter)
+    raise ArgumentError, 'Argument is nil' if letter.nil?
+    raise ArgumentError, 'Argument is empty' if letter.empty? 
+    raise ArgumentError, 'Argument is not a letter' if /\W/.match(letter)
+    letter.downcase!
+    if @word.include? letter
+      if not @guesses.include? letter
+        @guesses << letter
+      else
+        return false
+      end
+    else
+      if not @wrong_guesses.include? letter
+        @wrong_guesses << letter
+      else
+        return false
+      end
+    end
+  end
+  
+  def word_with_guesses
+    display = ''
+    word = @word.split(//)
+    word.each do |letter|
+      if @guesses.include? letter
+        display << letter
+      else
+        display << '-'
+      end
+    end
+    return display
+  end
+  
+  def check_win_or_lose
+    if wrong_guesses.size >= 7
+      return :lose
+    elsif word_with_guesses == @word
+      return :win
+    else
+      return :play
+    end
+  end
+    
   def self.get_random_word
     require 'uri'
     require 'net/http'
