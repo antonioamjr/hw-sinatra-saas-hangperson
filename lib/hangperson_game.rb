@@ -20,7 +20,7 @@ class HangpersonGame
   attr_accessor :wrong_guesses
   
   def guess(letter)
-    raise ArgumentError, 'Argument is nil' if letter.nil?
+    raise ArgumentError, 'Argument is nil' if letter.nil? #Must be first
     raise ArgumentError, 'Argument is empty' if letter.empty? 
     raise ArgumentError, 'Argument is not a letter' if /\W/.match(letter)
     letter.downcase!
