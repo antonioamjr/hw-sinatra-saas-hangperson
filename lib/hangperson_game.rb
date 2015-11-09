@@ -22,7 +22,7 @@ class HangpersonGame
   def guess(letter)
     raise ArgumentError, 'Argument is nil' if letter.nil? #Must be first
     raise ArgumentError, 'Argument is empty' if letter.empty? 
-    raise ArgumentError, 'Argument is not a letter' if /\W/.match(letter)
+    raise ArgumentError, 'Argument is not a letter' if /\W/.match(letter) or /\d/.match(letter)
     letter.downcase!
     if @word.include? letter
       if not @guesses.include? letter
