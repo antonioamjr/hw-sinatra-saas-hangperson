@@ -14,18 +14,10 @@ class HangpersonGame
     @wrong_guesses = ''
     return self
   end
-  
-  def word
-    return @word
-  end
-  
-  def guesses
-    return @guesses
-  end
 
-  def wrong_guesses
-    return @wrong_guesses
-  end
+  attr_accessor :word
+  attr_accessor :guesses
+  attr_accessor :wrong_guesses
   
   def guess(letter)
     raise ArgumentError, 'Argument is nil' if letter.nil?
